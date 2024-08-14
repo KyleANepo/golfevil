@@ -5,6 +5,7 @@ using UnityEngine;
 public class golfball : MonoBehaviour
 {
     Rigidbody2D body;
+    public GameObject arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -15,27 +16,14 @@ public class golfball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Launch(100f);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.Rotate(0.0f, 0.0f, 5.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.Rotate(0.0f, 0.0f, -5.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            transform.rotation = Quaternion.identity;
-        }
+        
     }
 
-    public void Reset()
+    public void ResetBall ()
     {
         transform.rotation = Quaternion.identity;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0;
     }
 
     public void RotateBall(float angle)
@@ -47,5 +35,33 @@ public class golfball : MonoBehaviour
     public void Launch(float force)
     {
         body.AddForce(transform.up * force);
+    }
+
+    bool arrowToggle = false;
+
+    public void ShowArrow()
+    {
+        arrow.SetActive(true);
+        arrowToggle = true;
+    }
+
+    public void HideArrow()
+    {
+        arrow.SetActive(false);
+        arrowToggle = false;
+    }
+
+    public void ToggleArrow()
+    {
+        if (arrowToggle)
+        {
+            arrow.SetActive(false);
+            arrowToggle = false;
+        }
+        else
+        {
+            arrow.SetActive(true);
+            arrowToggle = true;
+        }
     }
 }

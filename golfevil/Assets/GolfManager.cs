@@ -20,10 +20,11 @@ public class GolfManager : MonoBehaviour
         // Debug.Log(turnState);
         if (Input.GetKeyDown(KeyCode.Space) && turnState <= 4)
         {
-            turnState = turnState + 1;
+            turnState += 1;
         } else if (Input.GetKeyDown(KeyCode.Space) && turnState > 4)
         {
             turnState = 0;
+            ResetBall();
         }
     }
 
@@ -41,6 +42,7 @@ public class GolfManager : MonoBehaviour
         if (turnState == 1)
         {
             GetAngle();
+            ball.ShowArrow();
         }
         else if (turnState == 2)
         {
@@ -48,6 +50,7 @@ public class GolfManager : MonoBehaviour
         }
         else if (turnState == 3)
         {
+            ball.HideArrow();
             LaunchBall();
             turnState += 1;
             // turnState = 0;
@@ -110,7 +113,7 @@ public class GolfManager : MonoBehaviour
             power -= powerTempo;
         }
 
-        Debug.Log(power);
+        // Debug.Log(power);
     }
 
     private void LaunchBall()
@@ -120,6 +123,8 @@ public class GolfManager : MonoBehaviour
 
     private void ResetBall()
     {
-        
+        ball.ResetBall();
+        angle = 0.0f;
+        power = 0.0f;
     }
 }
